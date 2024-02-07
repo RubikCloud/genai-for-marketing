@@ -88,7 +88,7 @@ campaigns_key = "Campaigns"
 
 # This variable will be used to give permissions to all users under this domain
 # This permission is related to the Workspace Drive folder
-domain = "<YOUR DOMAIN>"
+domain = "www.beyondmediaagency.com"
 
 # Default themes 
 # (optional) Include or remove themes as needed
@@ -226,7 +226,7 @@ page_title_image = "/app/images/audience_icon.png"
 
 # Dataset ID of the BigQuery dataset. If you change the dataset_id during the deployment 
 # of this solution, change it here as well.
-dataset_id = ""
+dataset_id = "genai-testing-413616"
 
 # Tag name for the Dataplex Tag manager.
 tag_name = ""
