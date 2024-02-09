@@ -25,6 +25,7 @@ location = "us-central1"
 # This credential will be used to interact with Workspace
 # This is the path inside the docker image, example: /app/credential.json
 service_account_json_key = '/credentials/credentials.json'  # Change this path if you copied the file to a different path 
+# O la creó automaticamente y está ok o nos falta detallarla.
 
 
 # -----------------------------------------------------------------------------
