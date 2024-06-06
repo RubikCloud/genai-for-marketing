@@ -17,14 +17,15 @@
 Utility module for Codey releated demo.
 """
 
+import json
 from google.cloud import bigquery
 
 
 def get_tags_from_table(
         datacatalog_client,
-        dataset_id: str, 
-        table_id: str, 
-        project_id: str, 
+        dataset_id: str,
+        table_id: str,
+        project_id: str,
         tag_template_name: str
 ):
     """Gets the tags from a BigQuery table.
@@ -47,6 +48,8 @@ def get_tags_from_table(
         f"//bigquery.googleapis.com/projects/{project_id}"
         f"/datasets/{dataset_id}/tables/{table_id}"
     )
+    print(f"{resource_name=}")
+
     table_entry = datacatalog_client.lookup_entry(
         request={"linked_resource": resource_name}
     )
@@ -60,20 +63,23 @@ def get_tags_from_table(
             desc = response.fields["description"].string_value
             data_type = response.fields["data_type"].string_value
             pk = response.fields["is_primary_key"].bool_value
-            fk = response.fields["is_foreign_key"].bool_value            
+            fk = response.fields["is_foreign_key"].bool_value
             tags_str += ("Full table name: {} "
-                         "- Column: {} " 
-                         "- Data Type: {} " 
-                         "- Primary Key: {} " 
-                         "- Foreign Key: {} " 
+                         "- Column: {} "
+                         "- Data Type: {} "
+                         "- Primary Key: {} "
+                         "- Foreign Key: {} "
                          "- Description: {}\n".format(
-                f'`{project_id}.{dataset_id}.{table_id}`', 
-                response.column, 
-                data_type, 
-                pk, 
-                fk, 
-                desc))
+                             f'`{project_id}.{dataset_id}.{table_id}`',
+                             response.column,
+                             data_type,
+                             pk,
+                             fk,
+                             desc))
 
+        else:
+            print(f"otro tag template name: {response.template}")
+    print(f"{tags_str=}")
     return tags_str
 
 
@@ -82,7 +88,7 @@ def get_metadata_from_dataset(
         datacatalog_client,
         query: str,
         project_id: str,
-        dataset_id: str, 
+        dataset_id: str,
         tag_template_name: str
 ):
     """Gets the metadata for all tables in a BigQuery dataset.
@@ -110,9 +116,9 @@ def get_metadata_from_dataset(
 
         table_metadata += get_tags_from_table(
             datacatalog_client,
-            dataset_id, 
-            row.table_name, 
-            project_id, 
+            dataset_id,
+            row.table_name,
+            project_id,
             tag_template_name)
         metadata.append(table_metadata)
 
@@ -157,14 +163,19 @@ def generate_prompt(
     Returns:
         The prompt.
     """
-    PROMPT_PROJECT_ID = [project_id]*7
     context = ''
     for i in metadata:
         context += i
 
-    return (f"{prompt.format(context,*PROMPT_PROJECT_ID)} \n"
-             f"[Q]: {question} \n"
-             "[SQL]:")
+    pr = (f"{prompt.format(context)} \n"
+          f"Tables are: \n"
+          f"`{project_id}.gai_marketing.transactions`\n"
+          f"`{project_id}.gai_marketing.events`\n"
+          f"`{project_id}.gai_marketing.customers`\n"
+          f"[Q]: {question} \n"
+          "[SQL]:")
+    print(pr)
+    return pr
 
 
 def generate_sql_and_query(
@@ -202,22 +213,22 @@ def generate_sql_and_query(
     metadata = get_metadata_from_dataset(
         bqclient=bqclient,
         datacatalog_client=datacatalog_client,
-        query=query_metadata, 
-        project_id=project_id, 
+        query=query_metadata,
+        project_id=project_id,
         dataset_id=dataset_id,
         tag_template_name=tag_template_name)
 
     prompt = generate_prompt(
-        question, 
+        question,
         metadata,
         prompt_template,
         project_id)
 
     gen_code = llm.predict(
-        prompt = prompt,
-        max_output_tokens = 1024,
+        prompt=prompt,
+        max_output_tokens=1024,
         temperature=0.3
-    ).text.replace("```","")
+    ).text.replace("```", "")
     gen_code = gen_code[gen_code.find("SELECT"):]
     result = []
     result_job = bqclient.query(gen_code)

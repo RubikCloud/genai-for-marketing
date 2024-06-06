@@ -205,7 +205,7 @@ def create_campaign(
                     gender_select_theme,
                     age_select_theme,
                     objective_select_theme,
-                    competitor_select_theme,
+                    # competitor_select_theme,
                     BRAND_OVERVIEW,
                 )
             ),
@@ -219,13 +219,7 @@ def create_campaign(
                 )
             ),
             utils_prompt.async_predict_text_gemini(
-                COMMS_CHANNEL_PROMPT_TEMPLATE.format(
-                    gender_select_theme,
-                    age_select_theme,
-                    objective_select_theme,
-                    competitor_select_theme,
-                )
-            ),
+                COMMS_CHANNEL_PROMPT_TEMPLATE),
         )
 
     try:
@@ -318,7 +312,8 @@ async def delete_campaign(user_id: str, campaign_id: str):
     """
     Delete Campiagn from backend storage
     """
-    response = utils_firebase.delete_campaign(user_id=user_id, campaign_id=campaign_id)
+    response = utils_firebase.delete_campaign(
+        user_id=user_id, campaign_id=campaign_id)
     print(response)
     return JSONResponse(
         content={"message": "Successfully Deleted Campaign"}, status_code=200
@@ -444,7 +439,8 @@ def post_image_edit(data: ImageEditRequest) -> ImageGenerateResponse:
     try:
         imagen_responses = imagen.edit_image(
             prompt=data.prompt,
-            base_image=Image(image_bytes=base64.b64decode(data.base_image_base64)),
+            base_image=Image(image_bytes=base64.b64decode(
+                data.base_image_base64)),
             mask=mask,
             number_of_images=data.number_of_images,
             negative_prompt=data.negative_prompt,
@@ -577,7 +573,9 @@ def post_audiences(data: AudiencesRequest) -> AudiencesResponse:
             tag_template_name=tag_template_name,
             bqclient=bq_client,
         )
-        crm_data = bulk_email_util.generate_information(audiences).to_dict("records")
+        print(f"{audiences=}")
+        crm_data = bulk_email_util.generate_information(
+            audiences).to_dict("records")
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
@@ -598,7 +596,8 @@ def get_dataset_sample(table_name: str) -> AudiencesSampleDataResponse:
     """
 
     if table_name not in ["customers", "events", "transactions"]:
-        raise HTTPException(status_code=400, detail="Provide a valid table name.")
+        raise HTTPException(
+            status_code=400, detail="Provide a valid table name.")
 
     query = f"SELECT * FROM `{project_id}.{dataset_id}.{table_name}` LIMIT 3"
     result_job = bq_client.query(query=query)
@@ -824,12 +823,12 @@ def translate_text(data: TranslateRequest) -> TranslateResponse:
         while i * 128 < len(text):
             if data.source_language_code == None:
                 result = translate_client.translate(
-                    text[i * 128 : i * 128 + 128],
+                    text[i * 128: i * 128 + 128],
                     target_language=data.target_language_code,
                 )["translatedText"]
             else:
                 result = translate_client.translate(
-                    text[i * 128 : i * 128 + 128],
+                    text[i * 128: i * 128 + 128],
                     source_language=data.source_language_code,
                     target_language=data.target_language_code,
                 )["translatedText"]

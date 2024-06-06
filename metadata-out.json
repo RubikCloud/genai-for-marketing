@@ -1,0 +1,202 @@
+[
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "transactions",
+    "column_id": "transaction_id",
+    "description": "self explanatory",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "transactions",
+    "column_id": "customer_id",
+    "description": "self explanatory",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "transactions",
+    "column_id": "transaction_quantity",
+    "description": "self explanatory",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "transactions",
+    "column_id": "transaction_value",
+    "description": "self explanatory",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "transactions",
+    "column_id": "transaction_type",
+    "description": "One of: carga,anulacion,vencimiento,banderazo,promocion,redencion,regalo_comercio,regalo",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "transactions",
+    "column_id": "app_purchase_quantity",
+    "description": "self explanatory",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "transactions",
+    "column_id": "is_online",
+    "description": "was the sale online?",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "transactions",
+    "column_id": "transaction_date",
+    "description": "self explanatory",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "transactions",
+    "column_id": "product_name",
+    "description": "self explanatory",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "transactions",
+    "column_id": "product_id",
+    "description": "self explanatory",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "customers",
+    "column_id": "id_campaign",
+    "description": "The ID of the campaign that targeted the user",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "customers",
+    "column_id": "brancht_id",
+    "description": "The ID of the point of sale. Note the typo in 'brancht'",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "customers",
+    "column_id": "customer_id",
+    "description": "ID of the customer",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "customers",
+    "column_id": "email",
+    "description": "Email of the customer",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "customers",
+    "column_id": "city",
+    "description": "The city of the customer",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "customers",
+    "column_id": "state",
+    "description": "The state where the customer lives in",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "customers",
+    "column_id": "channel",
+    "description": "The channel the customer uses. Either 'Email' or 'SMS'",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "customers",
+    "column_id": "total_purchases",
+    "description": "Total amount bought",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "customers",
+    "column_id": "total_value",
+    "description": "the value of the customer",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "customers",
+    "column_id": "total_emails",
+    "description": "the amount of emails sent to the customer",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "customers",
+    "column_id": "loyalty_score",
+    "description": "the loyalty score computed by the CRM",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "customers",
+    "column_id": "is_media_follower",
+    "description": "Is the customer a media follower?",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "customers",
+    "column_id": "last_sign_up_date",
+    "description": "self explanatory",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "customers",
+    "column_id": "last_purchase_up_date",
+    "description": "self explanatory",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  },
+  {
+    "dataset_id": "gai_marketing",
+    "table_id": "customers",
+    "column_id": "last_activity_up_date",
+    "description": "self explanatory",
+    "is_primary_key": false,
+    "is_foreign_key": false
+  }
+]
